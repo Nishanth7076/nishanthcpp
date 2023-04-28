@@ -12,7 +12,7 @@ import {
 import Forms from './Login';
 import Profile from './Profile';
 
-export default function FacultyPage() {
+export default function FacultyPage({doLogout}) {
 
   const [course, setCourse] = useState('Select Course');
   const [verticalActive, setVerticalActive] = useState('tab1');
@@ -20,6 +20,7 @@ export default function FacultyPage() {
   const [student, setStudent] = useState({
     name:'Select Student'
 })
+const fac = true;
   const initialStudents = [
     {
         'id':'000',
@@ -36,7 +37,7 @@ export default function FacultyPage() {
     setVerticalActive(value);
   };
 
-  
+
   
   return (
       <MDBContainer className="mt-5">
@@ -130,7 +131,7 @@ export default function FacultyPage() {
       </ul>
             </MDBTabsPane>
             <MDBTabsPane show={verticalActive === 'tab3'}>
-                <Profile/>
+                <Profile doLogout={doLogout} isFac={fac}/>
             </MDBTabsPane>
           </MDBTabsContent>
         </MDBCol>

@@ -7,7 +7,7 @@ import Profile from './Profile';
 import { useState } from 'react';
 
 function App() {
-  const [isStudent, setIsStudent] = useState(null)
+  const [isStudent, setIsStudent] = useState(true)
   const [isLoggedIn, setIsLoggedIn] = useState(false)
 
   function login(data){
@@ -18,19 +18,24 @@ function App() {
       setIsLoggedIn(true)
       setIsStudent(true)
     }
-    if(data.email === student && data.password === student){
+    else if(data.email === admin && data.password === admin){
       setIsLoggedIn(true)
       setIsStudent(false)
     }
+    else{
+      alert("Incorrect Credentials")
+    }
   }
 
-  
+  function logout(){
+    setIsLoggedIn(false)
+  }
 
   return (
     <div className="App">
       {
         !isLoggedIn ? <Forms doLogin={login}/> :
-        (isStudent ? <StudentPage /> : <FacultyPage/>)
+        (isStudent ? <StudentPage doLogout={logout}/> : <FacultyPage doLogout={logout}/>)
       }
     </div>
   );

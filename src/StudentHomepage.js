@@ -15,7 +15,7 @@ import Profile from './Profile';
 import Schedule from './components/Schedule';
 import Grades from './components/Grades';
 
-export default function StudentPage() {
+export default function StudentPage({doLogout}) {
   const [verticalActive, setVerticalActive] = useState('tab1');
 
   const handleVerticalClick = (value) => {
@@ -63,7 +63,7 @@ export default function StudentPage() {
                 <Schedule/>
             </MDBTabsPane>
             <MDBTabsPane show={verticalActive === 'tab3'}>
-                <Profile/>
+                <Profile doLogout={doLogout}/>
             </MDBTabsPane>
           </MDBTabsContent>
         </MDBCol>
