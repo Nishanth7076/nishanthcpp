@@ -7,7 +7,7 @@ import {
   MDBTabsPane, MDBTable, MDBTableHead, MDBTableBody
 } from 'mdb-react-ui-kit';
 
-export default function Grades() {
+export default function Grades({grades}) {
   const [fillActive, setFillActive] = useState('tab1');
 
   const handleFillClick = (value) => {
@@ -55,23 +55,23 @@ export default function Grades() {
       <MDBTableBody>
         <tr className='table-success'>
           <th >Cloud Architecture</th>
-          <td>50%</td>
-          <td>C</td>
+          <td>{grades.cloudarch}</td>
+          <td>{grades.cagrade}</td>
         </tr>
         <tr className='table-success'>
-          <th >Block Chain</th>
-          <td>55%</td>
-          <td>B+</td>
+          <th>Block Chain</th>
+          <td>{grades.blockchain}</td>
+          <td>{grades.bcgrade}</td>
         </tr>
         <tr className='table-success'>
           <th >CPP</th>
-          <td>70%</td>
-          <td>B</td>
+          <td>{grades.cpp}</td>
+          <td>{grades.cppGrade}</td>
         </tr>
         <tr className='table-success'>
           <th >DevOps</th>
-          <td>60%</td>
-          <td>B-</td>
+          <td>{grades.devops}</td>
+          <td>{grades.dograde}</td>
         </tr>
         </MDBTableBody>
         </MDBTable>

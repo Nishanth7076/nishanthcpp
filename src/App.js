@@ -4,11 +4,12 @@ import Forms from './Login';
 import StudentPage from './StudentHomepage';
 import FacultyPage from './FacultyHomepage';
 import Profile from './Profile';
-import { useState } from 'react';
-
+import { useState, useEffect } from 'react';
+import { useCookies } from 'react-cookie';
 function App() {
   const [isStudent, setIsStudent] = useState(true)
   const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const [cookies, setCookie] = useCookies(['isLogIn', 'isstu']);
 
   function login(data){
     const student = "22103945"
@@ -17,10 +18,12 @@ function App() {
     if(data.email === student && data.password === student){
       setIsLoggedIn(true)
       setIsStudent(true)
+      setCookie('isLogIn',true, {path:'/'})
     }
     else if(data.email === admin && data.password === admin){
       setIsLoggedIn(true)
       setIsStudent(false)
+      setCookie('isLogIn',true, {path:'/'})
     }
     else{
       alert("Incorrect Credentials")
@@ -28,8 +31,15 @@ function App() {
   }
 
   function logout(){
+    setCookie('isLogIn', false, {path:'/'})
     setIsLoggedIn(false)
   }
+
+  useEffect(()=>{
+    if(cookies.isLogIn === 'true'){
+      //setIsLoggedIn(cookies.isLogIn)
+    }    
+  }, [cookies.isLogIn])
 
   return (
     <div className="App">

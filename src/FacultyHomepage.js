@@ -15,6 +15,8 @@ import Profile from './Profile';
 export default function FacultyPage({doLogout}) {
 
   const [course, setCourse] = useState('Select Course');
+  const [sub, setSub] = useState(null)
+  const [per, setPer] = useState(0)
   const [verticalActive, setVerticalActive] = useState('tab1');
   const [schedule, setSchedule] = useState('Select schedule')
   const [student, setStudent] = useState({
@@ -37,7 +39,23 @@ const fac = true;
     setVerticalActive(value);
   };
 
-
+  function updateResult(){
+    fetch('https://hiavqlukke.execute-api.eu-west-1.amazonaws.com/Production/updateresults', {
+    method: 'POST',
+    headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+        "course": sub,
+        "per" : per
+    })
+    })
+    .then(response => response.json())
+    .then(response => {
+      alert(response)
+    })
+   }
   
   return (
       <MDBContainer className="mt-5">
@@ -74,10 +92,10 @@ const fac = true;
             <MDBDropdown>
                 <MDBDropdownToggle>{course}</MDBDropdownToggle>
                 <MDBDropdownMenu >
-                    <MDBDropdownItem link onClick={(e)=> setCourse('Dev Ops')}>Dev Ops</MDBDropdownItem>
-                    <MDBDropdownItem link onClick={(e)=> setCourse('CPP')}>CPP</MDBDropdownItem>
-                    <MDBDropdownItem link onClick={(e)=> setCourse('Block Chain')}>BlockChain</MDBDropdownItem>
-                    <MDBDropdownItem link onClick={(e)=> setCourse('Cloud Architecture')}>Cloud Architecture</MDBDropdownItem>
+                    <MDBDropdownItem link onClick={(e)=> {setCourse('Dev Ops'); setSub('devops')}}>Dev Ops</MDBDropdownItem>
+                    <MDBDropdownItem link onClick={(e)=> {setCourse('CPP'); setSub('cpp')}}>CPP</MDBDropdownItem>
+                    <MDBDropdownItem link onClick={(e)=> {setCourse('Block Chain'); setSub('blockchain')}}>BlockChain</MDBDropdownItem>
+                    <MDBDropdownItem link onClick={(e)=> {setCourse('Cloud Architecture'); setSub('cloudarch')}}>Cloud Architecture</MDBDropdownItem>
                 
                 </MDBDropdownMenu>
     </MDBDropdown>
@@ -95,9 +113,9 @@ const fac = true;
     <br/>
     <div className="d-flex justify-content-center">
     <div>
-    <MDBInput  label='Percentage' id='form1' type='text' />
+    <MDBInput onChange={(e)=> setPer(e.target.value)}  label='Percentage' id='form1' type='text' />
     <br/>
-    <MDBBtn rounded className='me-1' color='secondary'>
+    <MDBBtn rounded className='me-1' color='secondary' onClick={updateResult}>
         Update
       </MDBBtn>
     </div>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { MDBCol, MDBContainer, MDBRow, MDBCard, MDBCardTitle, MDBCardText, MDBCardBody, MDBCardImage, MDBBtn } from 'mdb-react-ui-kit';
 
-export default function Profile({doLogout, isFac}) {
+export default function Profile({doLogout, isFac, name}) {
   return (
     
       <MDBContainer>
@@ -22,7 +22,7 @@ export default function Profile({doLogout, isFac}) {
                     !isFac ?
                   
                   <div className="flex-grow-1 ms-4">
-                    <MDBCardTitle>Nishanth Gone</MDBCardTitle>
+                    <MDBCardTitle>{name}</MDBCardTitle>
                     <MDBCardText>Graduate Student</MDBCardText>
 
                     <div className="d-flex justify-content-center rounded-3 p-4 mb-6"
